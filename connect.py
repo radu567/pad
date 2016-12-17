@@ -1,6 +1,6 @@
 import psycopg2
 
-# conexiune la baza de date : nume , utilizator, parola, host, port
+
 conn = psycopg2.connect(database="db", user="postgres", password="1111", host="127.0.0.1", port="5432")
 print("Conexiune realizata cu succes")
 
