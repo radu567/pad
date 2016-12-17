@@ -1,6 +1,6 @@
 Echipa Python
 
-Implementarea unui web-proxy : balansarea interogarilor client intre noduri numite dara warehouse , un nod ce ia date din baza de date, le serializeaza si le returneaza, similar nod informational, cum stocam date ? Avem 2 noduri, care cumva sinhronizeaza datele intre ele ( prin 2 metode, un nod specializat ce sinhronizeaza datele, sau folosim o baza de date, baza de date o folosim ca sa sinhronizam datele prin ea, fara tranzactii sau chestii gen, cum populam datele ? ele cumva apar, le introducem manual, generam random, etc )
+Implementarea unui web-proxy : balansarea interogarilor client intre noduri, numite dara warehouse , un nod ce ia date din baza de date, le serializeaza si le returneaza, similar nod informational, cum stocam date ? Avem 2 noduri, care cumva sincronizeaza datele intre ele, prin 2 metode, un nod specializat ce sincronizeaza datele, sau folosim o baza de date, baza de date o folosim ca sa sincronizam datele prin ea, fara tranzactii, cum populam datele ? ele apar de undeva, le introducem manual, generam random, etc.
 
 Membrii :
 Suicimezov Georgeta; 
