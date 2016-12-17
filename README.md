@@ -1,7 +1,6 @@
 Echipa Python
 
 Obiective:
-
     Aplicarea protocolului HTTP în transmisiuni de date;
     Elaborarea modulului reverse proxy;
        - Implementarea mecanismului de caching,
