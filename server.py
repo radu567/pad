@@ -1,4 +1,4 @@
-from bottle.bottle import route, run
+from bottle.bottle import route, run, template
 import psycopg2
 
 @route('/index')
@@ -11,6 +11,6 @@ def index():
         curs.execute("select * from student order by id asc;")
         rows = curs.fetchall()
     conn.close()
-    return str(rows)
+    return template('index', result=rows)
 
 run(host='localhost', port=8080, debug=True)
