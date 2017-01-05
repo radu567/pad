@@ -1,0 +1,2 @@
+To work with database install psycopg2, on linux type:
+pip3 install psycopg2
