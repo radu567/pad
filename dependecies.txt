@@ -1,2 +1,7 @@
 To work with database install psycopg2, on linux type:
 pip3 install psycopg2
+
+To run proxy server install:
+pip3 install aiohttp
+pip3 install cchardet - is a faster replacement for chardet (optional)
+pip3 install aiodns   - is a DNS resolver for asyncio (recommended)
