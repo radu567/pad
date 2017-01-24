@@ -47,8 +47,9 @@ def serialize(model):
   # then we return their values in a dict
   return dict((c, getattr(model, c)) for c in columns)
 
-@route('/index/<table_name>', method='GET')
-def index(table_name):
+@route('/student', method='GET')
+def index():
+    table_name = "student"
     db_url = get_connection_string('postgres', '1', 'postgres')
     engine = create_engine(db_url, echo=True) # Set echo=False if you don't want output from the database driver in the console
     session_factory = sessionmaker(bind=engine)
@@ -62,7 +63,7 @@ def index(table_name):
 
 @route('/index')
 def wrong():
-    redirect("/index/student")
+    redirect("/student")
 
 @error(404)
 def error404(error):
