@@ -70,4 +70,4 @@ def error404(error):
     return 'Page not found'
 
 def main():
-    run(host='localhost', port=8888, debug=True)
+    run(host='localhost', port=7777, debug=True)

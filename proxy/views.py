@@ -12,46 +12,38 @@ for i in ports:
 
 async def index(request):
     url = str(request.rel_url)
-    result = view_cache(url)
+    loop = asyncio.get_event_loop()
+    result = await view_cache(url)
     return web.Response(text=result)
-
-
-async def fetch(session, url):
-    with aiohttp.Timeout(10):
-        response = await session.get(url)
-        try:
-            return await response.text()
-        finally:
-            if sys.exc_info()[0] is not None:
-                response.close()
-            else:
-                await response.release()
-
 
 def create_url(url):
     # cream linkul
-    url = url
     host = 'http://localhost:'
     port = q.get()
     q.put(port)
     return host + str(port) + url
 
+async def fetch(client, url):
+    async with client.get(url) as resp:
+        assert resp.status == 200
+        return await resp.text()
 
-async def method(url):
-    loop = asyncio.get_event_loop()
-    with aiohttp.ClientSession(loop=loop) as session:
-        html = loop.run_until_complete(
-            fetch(session, create_url(url)))
+async def main(loop, url):
+    async with aiohttp.ClientSession(loop=loop) as client:
+        html = await fetch(client, create_url(url))
         print(html)
-        return "response"
-
+        return html
 
 async def view_cache(url):
     redis_db = redis.StrictRedis(host="localhost", port=6379, db=0)
     if redis_db.get('url') is None:
         # realizeaza cerere la nod
-        result = await method(url)
+        loop = asyncio.get_event_loop()
+        try:
+            result = await main(loop, url)
+        except:
+            result = "Cannot receive data from sever"
         redis_db.setex('url', 60000, result)
     else:
         result = redis_db.get('url')
-        return result
+    return str(result.decode())
