@@ -5,3 +5,6 @@ To run proxy server install:
 pip3 install aiohttp
 pip3 install cchardet - is a faster replacement for chardet (optional)
 pip3 install aiodns   - is a DNS resolver for asyncio (recommended)
+
+To use ORM SQLAlchemy install sqlalchemy:
+pip3 instal sqlalchemy

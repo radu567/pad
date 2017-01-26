@@ -69,5 +69,5 @@ def wrong():
 def error404(error):
     return 'Page not found'
 
-def main():
-    run(host='localhost', port=7777, debug=True)
+def main(port_server):
+    run(host='localhost', port=port_server, debug=True)
