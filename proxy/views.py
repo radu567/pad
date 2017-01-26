@@ -3,6 +3,7 @@ import asyncio
 import aiohttp
 import redis
 import sys
+import queue
 
 
 async def index(request):
@@ -23,15 +24,28 @@ async def fetch(session, url):
                 await response.release()
 
 
+def create_url(url):
+    q = queue.Queue()
+    ports=[7777, 8888, 9999]
+    for i in ports:
+        q.put(i)
+    # cream linkul
+    url = url
+    host = 'http://localhost:'
+    port = q.get()
+    q.put(port)
+    return host + str(port) + url
+
+
 async def method(url):
     loop = asyncio.get_event_loop()
     with aiohttp.ClientSession(loop=loop) as session:
         html = loop.run_until_complete(
-            fetch(session, 'http://localhost:8888/student'))
+            fetch(session, create_url(url)))
         print(html)
         return "response"
 
-    
+
 async def view_cache(url):
     redis_db = redis.StrictRedis(host="localhost", port=6379, db=0)
     if redis_db.get('url') is None:
