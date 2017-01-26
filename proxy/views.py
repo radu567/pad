@@ -5,6 +5,10 @@ import redis
 import sys
 import queue
 
+q = queue.Queue()
+ports=[7777, 8888, 9999]
+for i in ports:
+    q.put(i)
 
 async def index(request):
     url = str(request.rel_url)
@@ -25,10 +29,6 @@ async def fetch(session, url):
 
 
 def create_url(url):
-    q = queue.Queue()
-    ports=[7777, 8888, 9999]
-    for i in ports:
-        q.put(i)
     # cream linkul
     url = url
     host = 'http://localhost:'
