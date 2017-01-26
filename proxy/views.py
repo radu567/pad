@@ -21,6 +21,7 @@ def create_url(url):
     host = 'http://localhost:'
     port = q.get()
     q.put(port)
+    print("port ", port)
     return host + str(port) + url
 
 async def fetch(client, url):
@@ -38,12 +39,15 @@ async def view_cache(url):
     redis_db = redis.StrictRedis(host="localhost", port=6379, db=0)
     if redis_db.get('url') is None:
         # realizeaza cerere la nod
+        print("From database")
         loop = asyncio.get_event_loop()
         try:
             result = await main(loop, url)
         except:
             result = "Cannot receive data from sever"
-        redis_db.setex('url', 60000, result)
+        redis_db.setex('url', 30, result)
     else:
+        print("From cache")
         result = redis_db.get('url')
-    return str(result.decode())
+        result = str(result.decode())
+    return result
